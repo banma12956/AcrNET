@@ -6,13 +6,23 @@ Pytorch implementation and trained model for *DeepAcr: Predicting Anti-CRISPR wi
 - Python 3.6+.
 - PyTorch 1.10+. 
 
-## Usage
+## Simple demo
 
 We provide a trained model and a simple dataset for demonstration. Run the following code and try:
 
 ```python
 python test.py
 ```
+
+## Train
+
+We also provide a training demo:
+
+```python
+python train_five_fold.py
+```
+
+The data we used in experiments can be downloaded at https://drive.google.com/file/d/1LK6y9g75ktlJEOy3CXZcPpZjQ4h4l-Ws/view?usp=sharing
 
 ## Data
 
