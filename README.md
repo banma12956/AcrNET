@@ -1,6 +1,6 @@
 # DeepAcr: Predicting Anti-CRISPR with Deep Learning
 
-Pytorch implementation and trained model for *DeepAcr: Predicting Anti-CRISPR with Deep Learning*.
+Pytorch implementation and trained model for *AcrNET: Predicting Anti-CRISPR with Deep Learning*.
 
 ## Dependencies
 - Python 3.6+.
@@ -16,7 +16,7 @@ python test.py
 
 ## Train
 
-We also provide a training demo:
+We also provide the five-fold cross-validation training code we used in our experiment:
 
 ```python
 python train_five_fold.py
