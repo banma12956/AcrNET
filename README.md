@@ -12,7 +12,7 @@ cd AcrNET
 - Create an environment for AcrNET and activate it.
 ```shell
 conda env create -f environment.yml
-conda activate acrnet
+conda activate AcrNET
 ```
 
 ## Run a simple demo

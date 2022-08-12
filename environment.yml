@@ -1,4 +1,4 @@
-name: acrnet
+name: AcrNET
 channels:
   - defaults
 dependencies:
