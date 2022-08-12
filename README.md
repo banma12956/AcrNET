@@ -1,4 +1,4 @@
-# DeepAcr: Predicting Anti-CRISPR with Deep Learning
+# AcrNET: Predicting Anti-CRISPR with Deep Learning
 
 Pytorch implementation and trained model for *AcrNET: Predicting Anti-CRISPR with Deep Learning*.
 
