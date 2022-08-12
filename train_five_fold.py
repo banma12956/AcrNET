@@ -15,7 +15,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.nn.utils.rnn import pad_sequence
 
-from model import DeepAcr
+from model import AcrNET
 
 
 random.seed(0)
@@ -124,9 +124,8 @@ def train(seq, ss3, ss8, acc, data, label, train_index, test_index):
 
         if step == 3000:
             pred = pred.argmax(dim=-1)
-            acc = torch.mean((pred == label_batch).type(torch.float))
+            train_acc = torch.mean((pred == label_batch).type(torch.float)).item()
             train_loss = loss.item()
-            train_acc = acc.item()
             print("train, step {}, acc {:.4f}, loss {:.4f}".format(step, train_acc, train_loss))
 
             # eval
@@ -204,7 +203,7 @@ if __name__ == '__main__':
         print("===============================Round "+str(i)+"===============================")
         i += 1
         ''' model and optimizer and loss function '''
-        model = DeepAcr()
+        model = AcrNET()
         model.to(device)
         loss_function = nn.NLLLoss()
         optimizer = optim.Adam(model.parameters(), lr=0.001)

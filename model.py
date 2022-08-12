@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class DeepAcr(nn.Module):
+class AcrNET(nn.Module):
     def __init__(self):
-        super(DeepAcr, self).__init__()
+        super(AcrNET, self).__init__()
         self.conv = nn.Conv2d(in_channels=1, out_channels=20, kernel_size=(5, 34), 
                                stride=(1, 1))
 

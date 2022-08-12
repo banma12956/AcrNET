@@ -2,11 +2,19 @@
 
 Pytorch implementation and trained model for *AcrNET: Predicting Anti-CRISPR with Deep Learning*.
 
-## Dependencies
-- Python 3.6+.
-- PyTorch 1.10+. 
+## Environment Setup
+- install [anaconda](https://www.anaconda.com/) or [conda](https://docs.conda.io/projects/conda/en/latest/index.html)
+- create an environment for AcrNET by:
+```shell
+conda create --name acrnet python=3.9
+``` 
+- install dependencies:
+    - Install [PyTorch](https://pytorch.org/)
+    - pip install biopython
+    - pip install scikit-learn
+    - pip install numpy
 
-## Simple demo
+## Run a simple demo
 
 We provide a trained model and a simple dataset for demonstration. Run the following code and try:
 

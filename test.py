@@ -10,7 +10,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.nn.utils.rnn import pad_sequence
 
-from model import DeepAcr
+from model import AcrNET
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -70,8 +70,8 @@ def read_pssm_data(file_path):
 
 if __name__ == '__main__':
     ''' seq, ss3, ss8, acc '''
-    test_pos_seq, test_pos_ss3, test_pos_ss8, test_pos_acc = read_ss_data('data/pos/ss')
-    test_neg_seq, test_neg_ss3, test_neg_ss8, test_neg_acc = read_ss_data('data/neg/ss')
+    test_pos_seq, test_pos_ss3, test_pos_ss8, test_pos_acc = read_ss_data('test_data/pos/ss')
+    test_neg_seq, test_neg_ss3, test_neg_ss8, test_neg_acc = read_ss_data('test_data/neg/ss')
 
     seq = [*test_pos_seq, *test_neg_seq]
     ss8 = [*test_pos_ss8, *test_neg_ss8]
@@ -84,19 +84,19 @@ if __name__ == '__main__':
     acc = data_2_onehot(acc, 3)
 
     ''' 4 PSSM features '''
-    test_pos_pssm = read_pssm_data('data/pos/pssm')
-    test_neg_pssm = read_pssm_data('data/neg/pssm')
+    test_pos_pssm = read_pssm_data('test_data/pos/pssm')
+    test_neg_pssm = read_pssm_data('test_data/neg/pssm')
 
     dnn_data = []
     label = []
     ''' Transformer features '''
     for i in range(10):
         label.append(1)
-        embs = torch.load('data/pos/trans/'+str(i)+'.pt')
+        embs = torch.load('test_data/pos/trans/'+str(i)+'.pt')
         dnn_data.append(np.append(test_pos_pssm[i], embs['mean_representations'][33]))
     for i in range(10):
         label.append(0)
-        embs = torch.load('data/neg/trans/'+str(i)+'.pt')
+        embs = torch.load('test_data/neg/trans/'+str(i)+'.pt')
         dnn_data.append(np.append(test_neg_pssm[i], embs['mean_representations'][33]))
 
     dnn_data = torch.tensor(dnn_data).to(device)
@@ -104,9 +104,10 @@ if __name__ == '__main__':
 
     print("finish preparing data")
 
-    model = DeepAcr()
+    model = AcrNET()
     model.load_state_dict(torch.load('./model.ckpt'))
     model.to(device)
+    model.eval()
     pred = model(seq, ss3, ss8, acc, dnn_data)
     pred = pred.cpu().detach()
     pred = pred.argmax(dim=-1)
